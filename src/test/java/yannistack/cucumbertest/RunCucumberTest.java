@@ -21,8 +21,7 @@ public class RunCucumberTest {
 	@Before
 	public void SetupWebdriver() {
 		System.out.println("Setting up webdriver");
-		WebDriver myDriver = DriverManager.getEDriver();
-		myDriver.get(HomePage.url);
+		DriverManager.getEDriver().get(HomePage.url);
 	}
 	
 	@After
