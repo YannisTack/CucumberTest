@@ -17,16 +17,22 @@ public class StepDefinitions {
     	page = new HomePage(DriverManager.getEDriver());
     }
 
-    @When("I enter a new todo item")
-    public void enterNewTodoItem() {
+    @When("^I\\s(?:add|added)\\sa\\snew\\stodo\\sitem\\scalled\\s\"(.+)\"$")
+    public void addTodoItem(String itemName) {
     	System.out.println("StepDef - ENTER ITEM");
-    	page.inputNewTodo();
+    	page.addNewTodoItem(itemName);
+    }
+    
+    @When("^I\\s(?:add|added)\\s(\\d)\\snew\\stodo\\sitems$")
+    public void addMultipleTodoItems(int count) {
+    	System.out.println("StepDef - ENTER ITEM");
+    	page.addMultipleNewTodoItems(count);
     }
 
-    @Then("the item is visible")
-    public void theScenarioPasses() {
+    @Then("^the\\s(?:todo)?\\s?item\\scalled\\s\\\"(.+)\\\"\\sis\\svisible$")
+    public void theScenarioPasses(String itemName) {
     	System.out.println("StepDef - ASSERT");
-    	assertTrue(page.isListItemVisible("Automation is fun!"));
+    	assertTrue(page.isListItemVisible(itemName));
     }
 
 }
