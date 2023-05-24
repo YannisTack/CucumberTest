@@ -49,9 +49,11 @@ public class DriverManager {
 	public static void killDriver() {
 		if (driver != null) {
 			driver.quit();
+			driver = null;
 		}
 		if (eDriver != null) {
 			eDriver.quit();
+			eDriver = null;
 		}
 	}
 	
