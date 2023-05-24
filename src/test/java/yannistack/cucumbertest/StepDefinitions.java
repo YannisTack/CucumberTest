@@ -29,7 +29,7 @@ public class StepDefinitions {
     	page.addMultipleNewTodoItems(count);
     }
 
-    @Then("^The\\s(?:todo)?\\s?item\\scalled\\s\\\"(.+)\\\"\\sis\\svisible$")
+    @Then("^the\\s(?:todo)?\\s?item\\scalled\\s\\\"(.+)\\\"\\sis\\svisible$")
     public void theScenarioPasses(String itemName) {
     	System.out.println("StepDef - ASSERT");
     	assertTrue(page.isListItemVisible(itemName));
