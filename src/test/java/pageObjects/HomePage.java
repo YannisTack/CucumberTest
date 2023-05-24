@@ -21,10 +21,18 @@ public class HomePage {
 		PageFactory.initElements(this.driver, this);
 	}
 	
-	public HomePage inputNewTodo()
+	public HomePage addNewTodoItem(String itemName)
 	{
-		fldNewTodo.sendKeys("Automation is fun!");
+		fldNewTodo.sendKeys(itemName);
 		fldNewTodo.sendKeys(Keys.ENTER);
+		return new HomePage(driver);
+	}
+	
+	public HomePage addMultipleNewTodoItems(int count)
+	{
+		addNewTodoItem("Item1");
+		addNewTodoItem("Item2");
+		addNewTodoItem("Item3");
 		return new HomePage(driver);
 	}
 	
