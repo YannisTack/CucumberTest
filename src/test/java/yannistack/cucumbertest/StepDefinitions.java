@@ -19,7 +19,7 @@ public class StepDefinitions {
 
     @When("^I\\s(?:add|added)\\sa\\snew\\stodo\\sitem\\scalled\\s\"(.+)\"$")
     public void addTodoItem(String itemName) {
-    	System.out.println("StepDef - ENTER ITEM");
+    	System.out.println("Adding todo item '" + itemName + "'");
     	page.addNewTodoItem(itemName);
     }
     
@@ -27,6 +27,11 @@ public class StepDefinitions {
     public void addMultipleTodoItems(int count) {
     	System.out.println("StepDef - ENTER ITEM");
     	page.addMultipleNewTodoItems(count);
+    }
+    
+    @When("^I\\sdelete\\sthe\\stodo\\sitem\\scalled\\s\"(.+)\"$")
+    public void deleteTodoItem(String itemName) {
+    	System.out.println("Deleting todo item '" + itemName + "'");
     }
 
     @Then("^the\\s(?:todo)?\\s?item\\scalled\\s\\\"(.+)\\\"\\sis\\svisible$")
