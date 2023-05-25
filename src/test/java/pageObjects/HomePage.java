@@ -21,15 +21,13 @@ public class HomePage {
 		PageFactory.initElements(this.driver, this);
 	}
 	
-	public HomePage addNewTodoItem(String itemName)
-	{
+	public HomePage addNewTodoItem(String itemName)	{
 		fldNewTodo.sendKeys(itemName);
 		fldNewTodo.sendKeys(Keys.ENTER);
 		return new HomePage(driver);
 	}
 	
-	public HomePage addMultipleNewTodoItems(int count)
-	{
+	public HomePage addMultipleNewTodoItems(int count) {
 		addNewTodoItem("Item1");
 		addNewTodoItem("Item2");
 		addNewTodoItem("Item3");
@@ -42,6 +40,14 @@ public class HomePage {
 			return true;
 		}
 		else return false;
+	}
+	
+	public HomePage deleteTodoItem(String itemName)	{
+		WebElement listItemDeleteButton = ulItemList.findElement(By.xpath(".//label[text()='" + itemName + "']/following-sibling::button[@class='destroy']"));
+		if (listItemDeleteButton != null) {
+			listItemDeleteButton.click();
+		}
+		return new HomePage(driver);
 	}
 
 }
