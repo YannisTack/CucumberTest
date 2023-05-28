@@ -2,6 +2,7 @@ Feature: Todo CRUD
 
   Scenario: Creating a todo
     Given the homepage is shown
+    And the item called "Automation is fun!" is not yet added
     When I add a new todo item called "Automation is fun!"
     Then the item called "Automation is fun!" is visible
 

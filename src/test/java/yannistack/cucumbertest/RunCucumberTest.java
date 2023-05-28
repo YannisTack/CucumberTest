@@ -13,6 +13,8 @@ import utils.DriverManager;
 
 import static io.cucumber.junit.platform.engine.Constants.PLUGIN_PROPERTY_NAME;
 
+import java.util.concurrent.TimeUnit;
+
 @Suite
 @IncludeEngines("cucumber")
 @SelectClasspathResource("yannistack/cucumbertest")
@@ -21,6 +23,7 @@ public class RunCucumberTest {
 	@Before
 	public void SetupWebdriver() {
 		System.out.println("Setting up webdriver");
+		DriverManager.getEDriver().manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 		DriverManager.getEDriver().get(HomePage.url);
 	}
 	
