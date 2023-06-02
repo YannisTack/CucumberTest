@@ -23,7 +23,7 @@ public class RunCucumberTest {
 	@Before
 	public void SetupWebdriver() {
 		System.out.println("Setting up webdriver");
-		DriverManager.getEDriver().manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+		DriverManager.getEDriver().manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 		DriverManager.getEDriver().get(HomePage.url);
 	}
 	

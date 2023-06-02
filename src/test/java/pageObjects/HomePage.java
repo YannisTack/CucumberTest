@@ -1,5 +1,6 @@
 package pageObjects;
 
+import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -9,10 +10,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePage {
 	// Variables
 	private WebDriver driver;
+	private int timeoutInSeconds = 2;
 	public static String url = "https://todomvc.com/examples/vanillajs/";
 	
 	
@@ -35,10 +39,11 @@ public class HomePage {
 		return new HomePage(driver);
 	}
 	
-	public HomePage addMultipleNewTodoItems(int count) {
-		addNewTodoItem("Item1");
-		addNewTodoItem("Item2");
-		addNewTodoItem("Item3");
+	public HomePage addListOfItems(List<String> list) {
+		for (String item : list) {
+			System.out.println("Adding item: " + item);
+			addNewTodoItem(item);
+		}
 		return new HomePage(driver);
 	}
 	
@@ -55,6 +60,9 @@ public class HomePage {
 	}
 	
 	public HomePage deleteTodoItem(String itemName)	{
+		//Duration dur = Duration.ofSeconds(timeoutInSeconds);
+		//WebDriverWait wait = new WebDriverWait(driver, dur);
+		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//label[text()='" + itemName + "']")));
 		WebElement listItemDeleteButton = ulItemList.findElement(By.xpath(".//label[text()='" + itemName + "']/following-sibling::button[@class='destroy']"));
 		if (listItemDeleteButton != null) {
 			listItemDeleteButton.click();
@@ -71,6 +79,33 @@ public class HomePage {
 		
 		return new HomePage(driver);
 		
+	}
+	
+	public HomePage completeTodoItem(String itemName) {
+		WebElement listItemCompletedToggle = ulItemList.findElement(By.xpath(".//label[text()='" + itemName + "']/preceding-sibling::input"));
+		listItemCompletedToggle.click();
+		
+		return new HomePage(driver);
+	}
+	
+	// Debug methods
+	public void logCurrentListItems() {
+		List<WebElement> items = ulItemList.findElements(By.xpath(".//label"));
+		System.out.println("Current list of todo items:");
+		for (WebElement item : items) {
+			System.out.println(item.getText());
+		}
+	}
+	
+	public void getTodoItemIndex(String itemName) {
+		List<WebElement> items = ulItemList.findElements(By.xpath(".//label"));
+		System.out.println("Checking elements for item '" + itemName + "'");
+		for (int i = 0; i < items.size(); i++) {
+			System.out.println("Item " + i + ": " + items.get(i).getText());
+			if (items.get(i).getText().equals(itemName)) {
+				System.out.println("Target index: " + i);
+			}
+		}
 	}
 
 }
