@@ -9,9 +9,10 @@ Feature: Todo CRUD
   Scenario: Deleting a todo
     Given the homepage is shown
     And there are no todo items
-    When I add a new todo item called "A first task"
-    And I add a new todo item called "DeleteThisItem?"
-    And I add a new todo item called "A second task"
+    When I add the following list of items
+    | "A first task" |
+    | "DeleteThisItem?" |
+    | "A second task" |
     And I delete the todo item called "DeleteThisItem?"
     Then 2 todo items are visible
     And I don't see the item called "DeleteThisItem?"

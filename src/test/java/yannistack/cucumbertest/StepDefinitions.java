@@ -6,6 +6,8 @@ import utils.DriverManager;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Assertions.*;
 
 public class StepDefinitions {
@@ -37,10 +39,9 @@ public class StepDefinitions {
     	page.addNewTodoItem(itemName);
     }
     
-    @When("^I\\s(?:add|added)\\s(\\d)\\snew\\stodo\\sitems$")
-    public void addMultipleTodoItems(int count) {
-    	System.out.println("StepDef - ENTER ITEM");
-    	page.addMultipleNewTodoItems(count);
+    @When("I add the following set/list of items")
+    public void addListOfItems(List<String> list ) {
+    	
     }
     
     @When("^I\\sdelete\\sthe\\stodo\\sitem\\scalled\\s\"(.+)\"$")

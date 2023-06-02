@@ -35,10 +35,10 @@ public class HomePage {
 		return new HomePage(driver);
 	}
 	
-	public HomePage addMultipleNewTodoItems(int count) {
-		addNewTodoItem("Item1");
-		addNewTodoItem("Item2");
-		addNewTodoItem("Item3");
+	public HomePage addListOfItems(List<String> list) {
+		for (String item : list) {
+			addNewTodoItem(item);
+		}
 		return new HomePage(driver);
 	}
 	
