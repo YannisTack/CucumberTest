@@ -60,10 +60,10 @@ public class HomePage {
 	}
 	
 	public HomePage deleteTodoItem(String itemName)	{
-		Duration dur = Duration.ofSeconds(timeoutInSeconds);
-		WebDriverWait wait = new WebDriverWait(driver, dur);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//label[text()='" + itemName + "']")));
-		WebElement listItemDeleteButton = ulItemList.findElement(By.xpath(".//label[text()='" + itemName + "']/following-sibling::button[@class='destroy'][1]"));
+		//Duration dur = Duration.ofSeconds(timeoutInSeconds);
+		//WebDriverWait wait = new WebDriverWait(driver, dur);
+		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//label[text()='" + itemName + "']")));
+		WebElement listItemDeleteButton = ulItemList.findElement(By.xpath(".//label[text()='" + itemName + "']/following-sibling::button[@class='destroy']"));
 		if (listItemDeleteButton != null) {
 			listItemDeleteButton.click();
 		}
@@ -82,10 +82,30 @@ public class HomePage {
 	}
 	
 	public HomePage completeTodoItem(String itemName) {
-		WebElement listItemCompletedToggle = ulItemList.findElement(By.xpath(".//label[text()='" + itemName + "']/preceding-sibling::input[@class='toggle']"));
+		WebElement listItemCompletedToggle = ulItemList.findElement(By.xpath(".//label[text()='" + itemName + "']/preceding-sibling::input"));
 		listItemCompletedToggle.click();
 		
 		return new HomePage(driver);
+	}
+	
+	// Debug methods
+	public void logCurrentListItems() {
+		List<WebElement> items = ulItemList.findElements(By.xpath(".//label"));
+		System.out.println("Current list of todo items:");
+		for (WebElement item : items) {
+			System.out.println(item.getText());
+		}
+	}
+	
+	public void getTodoItemIndex(String itemName) {
+		List<WebElement> items = ulItemList.findElements(By.xpath(".//label"));
+		System.out.println("Checking elements for item '" + itemName + "'");
+		for (int i = 0; i < items.size(); i++) {
+			System.out.println("Item " + i + ": " + items.get(i).getText());
+			if (items.get(i).getText().equals(itemName)) {
+				System.out.println("Target index: " + i);
+			}
+		}
 	}
 
 }

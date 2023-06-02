@@ -23,7 +23,7 @@ Feature: Todo CRUD
     | "Work on assignments" |
     | "Do the dishes" |
     | "Complete this task" |
-    And I complete the task called "Complete this task"
+    And I complete the todo item called "Complete this task"
     Then The task called "Complete this task" is completed
     And The number of completed todo items is 1
 

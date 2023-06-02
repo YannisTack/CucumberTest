@@ -47,7 +47,16 @@ public class StepDefinitions {
     @When("^I\\sdelete\\sthe\\stodo\\sitem\\scalled\\s\"(.+)\"$")
     public void deleteTodoItem(String itemName) {
     	System.out.println("Deleting todo item '" + itemName + "'");
+    	page.logCurrentListItems();
+    	page.getTodoItemIndex(itemName);
     	page.deleteTodoItem(itemName);
+    }
+    
+    @When("I complete the todo item called {string}")
+    public void completeTodoItem(String itemName) {
+    	System.out.println("Completing todo item '" + itemName + "'");
+    	page.logCurrentListItems();
+    	page.completeTodoItem(itemName);
     }
 
     @Then("^the\\s(?:todo)?\\s?item\\scalled\\s\\\"(.+)\\\"\\sis\\svisible$")
