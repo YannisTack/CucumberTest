@@ -80,5 +80,12 @@ public class HomePage {
 		return new HomePage(driver);
 		
 	}
+	
+	public HomePage completeTodoItem(String itemName) {
+		WebElement listItemCompletedToggle = ulItemList.findElement(By.xpath(".//label[text()='" + itemName + "']/preceding-sibling::input[@class='toggle']"));
+		listItemCompletedToggle.click();
+		
+		return new HomePage(driver);
+	}
 
 }
