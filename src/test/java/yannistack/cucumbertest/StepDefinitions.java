@@ -41,7 +41,7 @@ public class StepDefinitions {
     
     @When("I add the following set/list of items")
     public void addListOfItems(List<String> list ) {
-    	
+    	page.addListOfItems(list);
     }
     
     @When("^I\\sdelete\\sthe\\stodo\\sitem\\scalled\\s\"(.+)\"$")

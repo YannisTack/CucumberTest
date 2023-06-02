@@ -1,5 +1,6 @@
 package pageObjects;
 
+import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -9,10 +10,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePage {
 	// Variables
 	private WebDriver driver;
+	private int timeoutInSeconds = 2;
 	public static String url = "https://todomvc.com/examples/vanillajs/";
 	
 	
@@ -37,6 +41,7 @@ public class HomePage {
 	
 	public HomePage addListOfItems(List<String> list) {
 		for (String item : list) {
+			System.out.println("Adding item: " + item);
 			addNewTodoItem(item);
 		}
 		return new HomePage(driver);
@@ -55,7 +60,10 @@ public class HomePage {
 	}
 	
 	public HomePage deleteTodoItem(String itemName)	{
-		WebElement listItemDeleteButton = ulItemList.findElement(By.xpath(".//label[text()='" + itemName + "']/following-sibling::button[@class='destroy']"));
+		Duration dur = Duration.ofSeconds(timeoutInSeconds);
+		WebDriverWait wait = new WebDriverWait(driver, dur);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//label[text()='" + itemName + "']")));
+		WebElement listItemDeleteButton = ulItemList.findElement(By.xpath(".//label[text()='" + itemName + "']/following-sibling::button[@class='destroy'][1]"));
 		if (listItemDeleteButton != null) {
 			listItemDeleteButton.click();
 		}
